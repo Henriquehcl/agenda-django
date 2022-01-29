@@ -6,6 +6,8 @@ from . import views
 
 urlpatterns = [
     # path('', ListaCompromissos.as_view(), name='home'),
-    path('', views.listaCompromisso, name='index')
-   
+    path('', views.meusCompromissos),
+    path('login/', views.meuLogin),
+    path('login/submit', views.autenticarLogin),
+    path('logout/', views.sairLogout),
 ]
