@@ -17,6 +17,9 @@ class Compromisso(models.Model):
     #formatando padrão da data
     def get_data_compromisso(self):
         return self.data_compromisso.strftime('%d/%m/%Y - %H:%M')
+    
+    def editar_data_compromisso(self):
+        return self.data_compromisso.strftime('%Y-%m-%dT%H:%M')
 
 """
 após fazer alteração no models, executar comandos

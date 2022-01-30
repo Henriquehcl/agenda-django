@@ -33,7 +33,11 @@ def sairLogout(request):
 
 @login_required(login_url='login/')
 def novoCompromisso(request):
-    return render(request, 'novocompromisso.html')
+    id_compromisso = request.GET.get('id')
+    dados ={}
+    if id_compromisso:
+        dados['compromisso'] = Compromisso.objects.get(id=id_compromisso)
+    return render(request, 'novocompromisso.html', dados)
 
 @login_required(login_url='login/')
 def cadastrarCompromisso(request):
@@ -42,9 +46,26 @@ def cadastrarCompromisso(request):
         data = request.POST.get('data_compromisso')
         descricao = request.POST.get('descricao')
         usuario = request.user
-        Compromisso.objects.create(titulo=assunto,
-                                   data_compromisso=data,
-                                   descricao=descricao,
-                                   usuario=usuario)
+        id_compromisso = request.POST.get('id_compromisso')
+        if id_compromisso:
+            compromisso = Compromisso.objects.get(id=id_compromisso)
+            if compromisso.usuario == usuario:
+                compromisso.titulo = assunto
+                compromisso.data_compromisso = data
+                compromisso.descricao = descricao
+                compromisso.save()
+        else:
+            Compromisso.objects.create(titulo=assunto,
+                                    data_compromisso=data,
+                                    descricao=descricao,
+                                    usuario=usuario)
     
     return redirect('/meuscompromissos/')
+
+@login_required(login_url='login/')
+def deletar(request, id_compromisso):
+    usuario = request.user
+    compromisso = Compromisso.objects.get(id=id_compromisso)
+    if usuario == compromisso.usuario:
+        compromisso.delete()
+    return redirect('/meuscompromissos/') 

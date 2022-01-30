@@ -12,6 +12,6 @@ urlpatterns = [
     path('logout/', views.sairLogout),
     path('novocompromisso/', views.novoCompromisso),
     path('novocompromisso/cadastrar/', views.cadastrarCompromisso),
-    
+    path('deletar/<int:id_compromisso>/', views.deletar),     
     
 ]

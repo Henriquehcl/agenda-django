@@ -2,15 +2,16 @@ Novo compromisso
 
 {% block content %}
     <form action="cadastrar/" method="POST"> {% csrf_token %}
+        <input type="number" name="id_compromisso" value="{{ compromisso.id}}" hidden>
         <label></label>
         <br>
-        <input type="text" name="assunto" size="15">
+        <input type="text" name="assunto" size="15" value="{{ compromisso.titulo }}">
         <label></label>
         <br>
-        <input type="datetime-local" name="data_compromisso" size="15">
+        <input type="datetime-local" name="data_compromisso" size="15" value="{{ compromisso.editar_data_compromisso}}">
         <label></label>
         <br>
-        <textarea name="descricao" cols="15" rows="7"></textarea>
+        <textarea name="descricao" cols="15" rows="7">{{ compromisso.descricao }}</textarea>
         <button type="submit"> Salvar </button>
         <a href="/meuscompromissos">
             <button type="cancelar">Cancelar</button>
