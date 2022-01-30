@@ -30,3 +30,21 @@ def autenticarLogin(request):
 def sairLogout(request):
     logout(request)
     return redirect('/')
+
+@login_required(login_url='login/')
+def novoCompromisso(request):
+    return render(request, 'novocompromisso.html')
+
+@login_required(login_url='login/')
+def cadastrarCompromisso(request):
+    if request.POST:
+        assunto = request.POST.get('assunto')
+        data = request.POST.get('data_compromisso')
+        descricao = request.POST.get('descricao')
+        usuario = request.user
+        Compromisso.objects.create(titulo=assunto,
+                                   data_compromisso=data,
+                                   descricao=descricao,
+                                   usuario=usuario)
+    
+    return redirect('/meuscompromissos/')

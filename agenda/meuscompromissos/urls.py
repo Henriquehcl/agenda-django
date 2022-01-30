@@ -10,4 +10,8 @@ urlpatterns = [
     path('login/', views.meuLogin),
     path('login/submit', views.autenticarLogin),
     path('logout/', views.sairLogout),
+    path('novocompromisso/', views.novoCompromisso),
+    path('novocompromisso/cadastrar/', views.cadastrarCompromisso),
+    
+    
 ]
