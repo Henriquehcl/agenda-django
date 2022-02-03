@@ -1,0 +1,46 @@
+<!-- detalhes
+<input type="number" name="id_compromisso" value="{{ compromisso.id}}">
+<a href="../novocompromisso/?id={{ compromisso.id }}" >Editar </a><a href="../deletar/{{ compromisso.id }}/" >Excluir </a><a href="../concluir/{{ compromisso.id }}" >Concluir </a><a href="../" >Voltar </a><a href="../../" >Ínicio </a>
+<p>Usuário: </P>{{compromisso.usuario}}
+<p>Assunto: </P>{{compromisso.titulo}}
+<p>Data: </P>{{compromisso.get_data_compromisso}}
+<p>situação: </p>{{ compromisso.situacao }}
+<p>Detalhes</p>{{ compromisso.detalhes }}
+-->
+{% include 'header.html' %}
+</div>
+<div class="menu">
+</div>
+
+<div class="container">
+    <div class="row">
+      <div class="atividade-detalhes">
+        <div class="titulo-detalhes"><b>Compromisso: </b>{{compromisso.titulo}}
+        </div>
+        <div id="data" class="data-detalhes"><b>Data e Hora: </b> {{compromisso.get_data_compromisso}}
+        </div>
+        <div class="responsavel-detalhes"><b>Resposável: </b>{{compromisso.usuario}}
+        </div>
+        <div class="situacao-detalhes">
+          <div class="situacao-detalhes-titulo">
+          <b>Staus: </b>
+          </div>
+          <div id="situacao" class="situacao"> {{ compromisso.situacao }} </div>
+        </div>
+        <div class="descricao-detalhes"><b>Descrição: </b>
+          <div class="descrição-compromisso">
+            {{ compromisso.detalhes }}
+          </div>
+        </div>
+        <div class="acoes-detalhes">
+          <a href="../" class="botao">Voltar</a>
+          <a href="../novocompromisso/?id={{ compromisso.id }}" class="botao">Editar</a>
+          <a href="../concluir/{{ compromisso.id }}" class="botao">Concluir</a>
+          <a href="../deletar/{{ compromisso.id }}/" class="botao">Excluir</a>
+          <a href="../../" class="botao">Todos Compromissos</a>
+        </div>
+      </div>
+    </div>
+</div>
+
+{% include 'footer.html' %}

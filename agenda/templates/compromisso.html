@@ -1,5 +1,7 @@
 {% include 'header.html' %}
-
+<!--
+<a href="/meuscompromissos"> Meus compromissos</a>
+<h1>Todo Compromissos</h1>
 {% for compromisso in compromissos  %}
     <ul>
         <li>
@@ -8,4 +10,35 @@
     </ul>
     
 {% endfor %}
+-->
+<div class="menu">
+    <a href="/meuscompromissos" class="botao menu-botao">Meus Compromissos</a>
+    <a href="#" class="botao menu-botao">Novo Compromisso</a>
+    <a href="#" class="botao menu-botao">Configurações</a>
+  </div>
+</div>
+<!--
+<div class="menu">
+<a href="#" class="botao">Meus Compromissos</a>
+<a href="#" class="botao">Novo Compromisso</a>
+<a href="#" class="botao">Configurações</a>
+</div> -->
+<div class="container">
+  <div class="row">
+    {% for compromisso in compromissos  %}
+    <div class="card">
+      <div class="card-content">
+        <ul>
+          <li class="compromisso"><b>Compromisso:</b>{{compromisso.titulo}}</li>
+          <li class="responsavel"><b>Resposável:</b>{{compromisso.usuario}}</li>
+          <li class="data-hora"> {{compromisso.get_data_compromisso}}</li>
+          <a href="detalhes.html" class="botao">+Detalhes</a>
+        </ul>
+      </div>
+    </div>
+    {% endfor %}
+    
+  </div>
+
+</div>
 {% include 'footer.html' %}

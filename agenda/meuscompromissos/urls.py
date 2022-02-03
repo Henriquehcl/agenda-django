@@ -12,6 +12,9 @@ urlpatterns = [
     path('logout/', views.sairLogout),
     path('novocompromisso/', views.novoCompromisso),
     path('novocompromisso/cadastrar/', views.cadastrarCompromisso),
-    path('deletar/<int:id_compromisso>/', views.deletar),     
+    path('deletar/<int:id_compromisso>/', views.deletar),    
+    path('detalhes/', views.detalhesCompromisso),
+    path('concluir/<int:id_compromisso>/', views.concluirCompromisso)
+     
     
 ]

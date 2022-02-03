@@ -1,12 +1,16 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, HttpResponse
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout
 from agendacore.models import Compromisso
 from django.contrib import messages
+from datetime import datetime
 
 @login_required(login_url='login/')
 def meusCompromissos(request):
     usuario = request.user
+    data_atual = datetime.now()
+    # compromisso = Compromisso.objects.filter(usuario=usuario,
+      #                                       data_compromisso__gt=data_atual) # __lt antigos, __gt atuale e futuros
     compromisso = Compromisso.objects.filter(usuario=usuario)
     response = {'compromissos': compromisso}
     return render(request, 'meuscompromissos.html', response)
@@ -46,6 +50,7 @@ def cadastrarCompromisso(request):
         data = request.POST.get('data_compromisso')
         descricao = request.POST.get('descricao')
         usuario = request.user
+        situacao = request.POST.get('situacao')
         id_compromisso = request.POST.get('id_compromisso')
         if id_compromisso:
             compromisso = Compromisso.objects.get(id=id_compromisso)
@@ -53,6 +58,7 @@ def cadastrarCompromisso(request):
                 compromisso.titulo = assunto
                 compromisso.data_compromisso = data
                 compromisso.descricao = descricao
+                compromisso.situacao = situacao
                 compromisso.save()
         else:
             Compromisso.objects.create(titulo=assunto,
@@ -69,3 +75,21 @@ def deletar(request, id_compromisso):
     if usuario == compromisso.usuario:
         compromisso.delete()
     return redirect('/meuscompromissos/') 
+
+@login_required(login_url='login/')
+def detalhesCompromisso(request):
+    id_compromisso = request.GET.get('id')
+    compromisso = Compromisso.objects.get(id=id_compromisso)
+    response = {'compromisso': compromisso}
+    return render(request,'detalhes.html',response)
+
+@login_required(login_url='login/')
+def concluirCompromisso(request, id_compromisso):
+    #id_compromisso = request.GET.get('id')
+    usuario = request.user
+    compromisso = Compromisso.objects.get(id=id_compromisso)
+    if compromisso.usuario == usuario:
+        compromisso.situacao = 'Concluído'
+        compromisso.save()
+    return redirect('/meuscompromissos/')
+    

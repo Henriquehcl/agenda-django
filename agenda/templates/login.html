@@ -1,4 +1,4 @@
-<h1> login </h1>
+<!-- <h1> login </h1>
 <form action="submit" method="POST"> {% csrf_token %}
 <label>Usuário: </label>
 <input type="text" name="username">
@@ -10,3 +10,33 @@
 {% for message in messages  %}
     {{ message }}
 {% endfor %}
+-->
+{% include 'header.html' %}
+</div>
+
+<div class="container">
+    <div class="row">
+      <div class="atividade-detalhes">
+        <form action="submit" method="POST"> {% csrf_token %}
+          <div class="titulo-detalhes">
+          <label for="fname">Usuário</label>
+          <input type="text" name="username">
+          <label for="fname">Senha</label>
+          <input type="password" name="password">
+
+
+          <div class="acoes-detalhes">
+            
+            <button type="submit" class="botao" >Acessar </button>
+
+          </div>
+        </form>
+        {% for message in messages  %}
+            {{ message }}
+        {% endfor %}
+      </div>
+
+    </div>
+</div>
+
+{% include 'footer.html' %}

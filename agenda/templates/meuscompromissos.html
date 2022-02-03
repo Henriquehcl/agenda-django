@@ -1,15 +1,34 @@
 {% include 'header.html' %}
-
-meus compromissos
-<a href="logout"> Sair </a>
-<a href="novocompromisso/">Novo compromisso</a>
-{% for compromisso in compromissos  %}
-    <ul>
-        <li>
-            {{compromisso.usuario}} - {{compromisso.titulo}} - {{compromisso.get_data_compromisso}}
-            <a href="">Detalhes </a><a href="novocompromisso/?id={{ compromisso.id }}"> Editar </a><a href="deletar/{{ compromisso.id }}/"> Excluir </a> 
-        </li>
-    </ul>
+<div class="menu">
+    <a href="novocompromisso/" class="botao menu-botao">Novo Compromisso</a>
+    <a href="../admin" class="botao menu-botao">Configurações</a>
+    <a href="logout" class="botao menu-botao">Sair</a>
+    <a href="../" class="botao menu-botao">Voltar</a>
+  </div>
+</div>
+<!--
+<div class="menu">
+<a href="#" class="botao">Meus Compromissos</a>
+<a href="#" class="botao">Novo Compromisso</a>
+<a href="#" class="botao">Configurações</a>
+</div> -->
+<div class="container">
+  <div class="row">
+    {% for compromisso in compromissos  %}
+    <div class="card">
+      <div class="card-content">
+        <ul>
+          <li class="compromisso"><b>Compromisso:</b>{{compromisso.titulo}}</li>
+          <li class="responsavel"><b>Resposável:</b>{{compromisso.usuario}}</li>
+          <li class="data-hora"> {{compromisso.get_data_compromisso}}</li>
+          <a href="detalhes/?id={{ compromisso.id }}" class="botao">+Detalhes</a>
+          <a href="concluir/{{ compromisso.id }}" class="botao">Concluir</a>
+        </ul>
+      </div>
+    </div>
+    {% endfor %}
     
-{% endfor %}
+  </div>
+
+</div>
 {% include 'footer.html' %}

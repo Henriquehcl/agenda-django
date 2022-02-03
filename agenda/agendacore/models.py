@@ -8,6 +8,7 @@ class Compromisso(models.Model):
     data_compromisso = models.DateTimeField(verbose_name='Data do Compromisso')
     data_criacao = models.DateTimeField(auto_now=True)
     usuario = models.ForeignKey(User, on_delete=models.CASCADE)
+    situacao = models.CharField(max_length=10, default='Aberto')
     concluido = models.BooleanField(default=False)
 
 

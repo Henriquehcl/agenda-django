@@ -1,6 +1,8 @@
-Novo compromisso
+{% include 'header.html' %}
 
+</div>
 {% block content %}
+<!----
     <form action="cadastrar/" method="POST"> {% csrf_token %}
         <input type="number" name="id_compromisso" value="{{ compromisso.id}}" hidden>
         <label></label>
@@ -10,11 +12,76 @@ Novo compromisso
         <br>
         <input type="datetime-local" name="data_compromisso" size="15" value="{{ compromisso.editar_data_compromisso}}">
         <label></label>
+        <input type="text" name="situacao" size="15" value="{{ compromisso.situacao}}" hidden>
         <br>
         <textarea name="descricao" cols="15" rows="7">{{ compromisso.descricao }}</textarea>
         <button type="submit"> Salvar </button>
-        <a href="/meuscompromissos">
+        <a href="/meuscompromissos/">
             <button type="cancelar">Cancelar</button>
         </a>
     </form>
+
+    
+    -->
+    <div class="container">
+        <div class="row">
+          <div class="atividade-detalhes">
+          <div class="titulo">
+            Cadastro de compromisso
+          </div>
+            <!----
+
+            <div class="titulo-detalhes"><b>Compromisso: </b>Dentista
+            </div>
+            <div id="data" class="data-detalhes"><b>Data e Hora: </b> 17/09/2023 - 8h00
+            </div>
+            <div class="responsavel-detalhes"><b>Resposável: </b>José
+            </div>
+            <div class="situacao-detalhes">
+              <div class="situacao-detalhes-titulo">
+              <b>Staus:</b>
+              </div>
+              <div id="situacao" class="situacao"> Aberto </div>
+            </div>
+            <div class="descricao-detalhes"><b>Descrição: </b>
+              <div class="descricao-compromisso">
+                Ir com os dentes escovados!
+              </div>
+            </div>
+            <div class="acoes-detalhes">
+              <a href="index.html" class="botao">Voltar</a>
+              <a href="#" class="botao">Editar</a>
+              <a href="#" class="botao">Concluir</a>
+              <a href="#" class="botao">Excluir</a>
+            </div>
+
+            ---->
+            <form action="cadastrar/" method="POST"> {% csrf_token %}
+              <input type="number" name="id_compromisso" value="{{ compromisso.id}}" hidden>
+              <div class="titulo-detalhes">
+              <label for="fname">Assunto</label>
+              <input type="text" id="assunto" name="assunto" value="{{ compromisso.titulo }}" placeholder="Assunto da atividade">
+              <label for="lname">Data</label>
+              <input type="datetime-local" value="{{ compromisso.editar_data_compromisso}}" size="15" name="data_compromisso" >
+              </div>
+              <input type="text" name="situacao" size="15" value="{{ compromisso.situacao}}" hidden>
+              <div class="descricao-compromisso">
+              <label for="lname">Descrição</label>
+              <textarea name="descricao" cols="15" rows="7" placeholder="Descrição da atividade">{{ compromisso.descricao }}</textarea>
+              </div>
+
+              <div class="acoes-detalhes">
+                
+                <button class="botao" type="submit"> Salvar </button>
+        <a href="/meuscompromissos/">
+            <button class="botao" type="cancelar">Cancelar</button>
+        </a>
+              </div>
+            </form>
+          </div>
+        </div>
+   </div>
+    
 {% endblock content %}
+
+{% include 'footer.html' %}
