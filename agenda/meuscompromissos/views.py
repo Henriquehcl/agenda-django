@@ -90,6 +90,31 @@ def concluirCompromisso(request, id_compromisso):
     compromisso = Compromisso.objects.get(id=id_compromisso)
     if compromisso.usuario == usuario:
         compromisso.situacao = 'Concluído'
+        compromisso.concluido = True
         compromisso.save()
     return redirect('/meuscompromissos/')
+
+@login_required(login_url='login/')
+def compromissosConcluido(request):
+    usuario = request.user
+    compromisso = Compromisso.objects.filter(usuario=usuario, concluido=True)
+    response = {'compromissos': compromisso}    
+    return render(request,'meuscompromissos.html', response)
     
+@login_required(login_url='login/')
+def compromissosAbertos(request):
+    usuario = request.user
+    compromisso = Compromisso.objects.filter(usuario=usuario, concluido=False)
+    response = {'compromissos': compromisso}    
+    return render(request,'meuscompromissos.html', response)
+
+@login_required(login_url='login/')
+def compromissosAtrasados(request):
+    usuario = request.user
+    data_atual = datetime.now()
+    compromisso = Compromisso.objects.filter(usuario=usuario,
+                                           data_compromisso__lt=data_atual,# __lt antigos, __gt atuale e futuros
+                                           concluido=False) 
+    #compromisso = Compromisso.objects.filter(usuario=usuario)
+    response = {'compromissos': compromisso}
+    return render(request, 'meuscompromissos.html', response)

@@ -14,7 +14,10 @@ urlpatterns = [
     path('novocompromisso/cadastrar/', views.cadastrarCompromisso),
     path('deletar/<int:id_compromisso>/', views.deletar),    
     path('detalhes/', views.detalhesCompromisso),
-    path('concluir/<int:id_compromisso>/', views.concluirCompromisso)
+    path('concluir/<int:id_compromisso>/', views.concluirCompromisso),
+    path('concluidos/', views.compromissosConcluido),
+    path('abertos/', views.compromissosAbertos),
+    path('atrasados/', views.compromissosAtrasados),
      
     
 ]

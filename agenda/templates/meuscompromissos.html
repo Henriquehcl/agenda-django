@@ -1,9 +1,15 @@
 {% include 'header.html' %}
 <div class="menu">
-    <a href="novocompromisso/" class="botao menu-botao">Novo Compromisso</a>
+    <a href="/meuscompromissos/novocompromisso/" class="botao menu-botao">Novo Compromisso</a>
     <a href="../admin" class="botao menu-botao">Configurações</a>
-    <a href="logout" class="botao menu-botao">Sair</a>
+    <a href="/meuscompromissos/logout" class="botao menu-botao">Sair</a>
     <a href="../" class="botao menu-botao">Voltar</a>
+  </div>
+  <div class="row menu-situacao">
+    <a href="/meuscompromissos/" class="botao bt menu-botao">Todos</a>
+    <a href="/meuscompromissos/concluidos/" class="botao bt menu-botao">Concuídos</a>
+    <a href="/meuscompromissos/abertos/" class="botao bt menu-botao">Abertos</a>
+    <a href="/meuscompromissos/atrasados/" class="botao bt bt-atrasado menu-botao">Atrasados</a>
   </div>
 </div>
 <!--
@@ -12,6 +18,7 @@
 <a href="#" class="botao">Novo Compromisso</a>
 <a href="#" class="botao">Configurações</a>
 </div> -->
+
 <div class="container">
   <div class="row">
     {% for compromisso in compromissos  %}
@@ -21,8 +28,9 @@
           <li class="compromisso"><b>Compromisso:</b>{{compromisso.titulo}}</li>
           <li class="responsavel"><b>Resposável:</b>{{compromisso.usuario}}</li>
           <li class="data-hora"> {{compromisso.get_data_compromisso}}</li>
-          <a href="detalhes/?id={{ compromisso.id }}" class="botao">+Detalhes</a>
-          <a href="concluir/{{ compromisso.id }}" class="botao">Concluir</a>
+          <li class="responsavel"> {{compromisso.concluido}}</li>
+          <a href="/meuscompromissos/detalhes/?id={{ compromisso.id }}" class="botao">+Detalhes</a>
+          <a href="/meuscompromissos/concluir/{{ compromisso.id }}" class="botao">Concluir</a>
         </ul>
       </div>
     </div>
